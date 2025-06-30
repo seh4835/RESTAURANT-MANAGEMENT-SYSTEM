@@ -1,0 +1,115 @@
+<!DOCTYPE html> <!--Specifies that this is a html document-->
+<html lang="en"> <!--Tells that this document is in english language -->
+<head>
+    <meta charset="UTF-8"> <!--To handle all the characters properly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Adjusting the width based on the device screen size-->
+    <title>Restaurant Management</title> <!--title of the webpage-->
+</head> <!--Data about the document-->
+
+<body style="background-color: #EBC2D5; margin: 0; padding: 0; font-family: Arial, sans-serif; color: #62021E;">  <!--Uses Arial font, Background(light pink),Text(Dark Red)and Adds padding around the content-->
+    
+    <table width="100%" height="200" background="{{ url_for('static', filename='images/image.png') }}"> <!--Full-width table with height 200px-->
+        <tr>
+            <td align="center" valign="middle">
+                <h1 style="font-size: 48px; color: white; margin: 0;">Amour Bistro</h1> <!--Displays “Amour Bistro” over the image in big white text-->
+            </td>
+        </tr>
+    </table>
+
+    <h1 style="text-align: center; font-size: 36px; margin-top: 20px; color: #A42153;">Amour Bistro</h1>
+    <h1 style="text-align: center; color: #C5558E;">Welcome to Our Restaurant</h1> <!--Both lines center text with custom colors.-->
+
+    <h2 style="color: #62021E; text-align: center;">{{ menu_type | capitalize }} Menu</h2> <!--menu type (like “lunch” or “drinks”) here and capitalize it.-->
+
+    <table border="1" style="width: 100%; background-color: #E6A6C6; color: #62021E; border-collapse: collapse;"> <!--table with full width, Border 1: shows borders and light pink(background) and dark pink(text)-->
+        <tr style="background-color: #A42153; color: white;">  
+            <th style="padding: 10px;">Category</th>
+            <th style="padding: 10px;">Section</th>
+            <th style="padding: 10px;">Item</th>
+            <th style="padding: 10px;">Order</th>  <!--table header row, with white text on a dark pink background.-->
+        </tr>
+        {% for item in menu %}
+        <tr>
+            <td style="padding: 8px; text-align: center;">{{ item[1] }}</td>
+            <td style="padding: 8px; text-align: center;">{{ item[2] }}</td>
+            <td style="padding: 8px; text-align: center;">{{ item[3] }}</td>
+            <td style="padding: 8px; text-align: center;">
+                <form action="{{ url_for('order') }}" method="post">
+                    <input type="hidden" name="item" value="{{ item[3] }}">
+                    <input type="number" name="quantity" value="0" min="1">
+                    <button type="submit" style="background-color: #A42153; color: white; border: none; padding: 5px 10px;">Order</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %} <!--loops through all items in the menu list, Displays their category, section, and item name and individual order with quantity input and a button-->
+    </table>
+
+    <h2 style="color: #62021E; text-align: center; margin-top: 30px;">A La Carte Menu</h2>
+    <form action="{{ url_for('order') }}" method="post">
+        <table border="1" style="width: 100%; background-color: #E6A6C6; color: #62021E; border-collapse: collapse;">
+            <tr style="background-color: #C5558E; color: white;">
+                <th style="padding: 10px;">Item</th>
+                <th style="padding: 10px;">Price</th>
+                <th style="padding: 10px;">Order</th>
+            </tr>
+            {% for item in a_la_carte_menu %}
+            <tr>
+                <td style="padding: 8px; text-align: center;">{{ item[0] }}</td>
+                <td style="padding: 8px; text-align: center;">${{ item[1] }}</td>
+                <td style="padding: 8px; text-align: center;">
+                    <input type="hidden" name="item" value="{{ item[0] }}">
+                    <input type="number" name="quantity" value="0" min="0">
+                </td>
+            </tr>
+            {% endfor %}  <!--Displays each item’s name and price with quantity input -->
+        </table>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" style="background-color: #A42153; color: white; padding: 10px 20px; border: none; border-radius: 4px; font-weight: bold;">Place Order</button>
+        </div>
+    </form>
+
+    <h2 style="color: #62021E; text-align: center; margin-top: 40px;">Customer Reviews</h2>
+    <table border="1" style="width: 50%; background-color: #D483AC; color: #62021E; border-collapse: collapse; margin-left: auto; margin-right: auto;"> <!--Centered table (width 50%) and Displays reviews one per row-->
+        <tr style="background-color: #C5558E; color: white;">
+            <th style="padding: 10px; text-align: left;">Review</th>
+        </tr>
+        {% if reviews %}
+            {% for review in reviews %}
+            <tr>
+                <td style="padding: 8px; text-align: left;">{{ review[0] }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="1" style="padding: 8px; text-align: center;">No reviews available.</td>
+            </tr>
+        {% endif %}  <!--Shows each review or a message if no reviews exist-->
+    </table>
+
+    <h3 style="color: #62021E; text-align: center; margin-top: 20px;">Leave a Review</h3>
+    <form action="{{ url_for('review') }}" method="post" style="background-color: #E6A6C6; padding: 20px; width: 50%; margin: 0 auto; border-radius: 8px;">
+        <div style="display: flex; flex-direction: column; gap: 10px;"> <!--By default, flexbox arranges items horizontally.Adds 10 pixels of space between each element inside the flex container.-->
+            <input type="text" name="name" placeholder="Your Name" required style="padding: 10px; border: 1px solid #C5558E; border-radius: 4px;">
+            <textarea name="review" placeholder="Your Review" required style="padding: 10px; border: 1px solid #C5558E; border-radius: 4px; height: 100px;"></textarea>
+            <button type="submit" style="background-color: #A42153; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Submit Review</button>
+        </div>
+    </form>
+
+    <br>
+    <a href="{{ url_for('admin') }}" style="display: block; text-align: center; color: #62021E; text-decoration: none; margin-top: 20px;">Go to Admin Panel</a>
+</body>
+</html>
+
+<!--FEW QUESTIONS/IMPORTANT CONCEPTS-->
+<!--What is <tr>?-->
+<!--It defines a row in an HTML table.-->
+
+<!--What is </td>?-->
+<!--It defines a cell in a table row that holds actual data -->
+
+<!--What is <th>?-->
+<!--It defines a header cell in a table. It’s usually bold and centered by default.-->
+
+<!--What is </textarea>?-->
+<!--is an HTML element that creates a multi-line text input box where users can type in longer content — like reviews-->

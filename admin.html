@@ -1,0 +1,86 @@
+<!DOCTYPE html> <!--Specifies that this is a html document-->
+<html lang="en"> <!--Tells that this document is in english language -->
+<head>
+    <meta charset="UTF-8"> <!--To handle all the characters properly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Adjusting the width based on the device screen size-->
+    <title>Admin Panel</title>  <!--title of the webpage-->
+</head>  <!--Data about the document-->
+
+<body style="font-family: Arial, sans-serif; background-color: #EBC2D5; color: #62021E; padding: 20px;">  <!--Uses Arial font, Background(light pink),Text(Dark Red)and Adds padding around the content-->
+
+    <h1 style="text-align: center; background-color: #A42153; color: white; padding: 15px; border-radius: 8px;">Admin Panel</h1> <!--Main Heading Centre (Dark Pink)-->
+
+    <div style="text-align: center; margin: 20px 0;">
+        <a href="{{ url_for('home') }}" style="text-decoration: none; background-color: #C5558E; color: white; padding: 10px 20px; border-radius: 5px;">Back to Home</a>
+    </div> <!-- styled "Back to Home" button linking to the home route with no underline and brackground(mid-pink)-->
+
+    <h2 style="color: #A42153;">Add Menu Item</h2>  <!--Add Menu(Dark Pink)-->
+    <form action="{{ url_for('admin_add_item') }}" method="post" style="background-color: #E6A6C6; padding: 20px; border-radius: 10px;">  <!--Starts the form to add a menu item with styles(light-pink)-->
+        <input type="password" name="admin_password" placeholder="Enter Admin Password" required  
+               style="padding: 10px; margin: 5px 0; width: 100%; border: 1px solid #C5558E; border-radius: 5px;"><br>  <!--required password input field with placeholder.-->
+
+        <input type="text" name="item" placeholder="Item Name" required 
+               style="padding: 10px; margin: 5px 0; width: 100%; border: 1px solid #C5558E; border-radius: 5px;"><br> <!--Text to be added-->
+
+        <select name="category" required               
+                style="padding: 10px; margin: 5px 0; width: 100%; border: 1px solid #C5558E; border-radius: 5px;">  <!--Dropdown for category selection.-->
+            <option value="buffet">Buffet</option>
+            <option value="a la carte">A La Carte</option>
+        </select><br>
+
+        <input type="text" name="section" placeholder="Section (Starters, Main Course, etc.) [For Buffet Only]"
+               style="padding: 10px; margin: 5px 0; width: 100%; border: 1px solid #C5558E; border-radius: 5px;"><br>  <!--Select field-->
+
+        <input type="number" name="₹ price" placeholder="Price" required 
+               style="padding: 10px; margin: 5px 0; width: 100%; border: 1px solid #C5558E; border-radius: 5px;"><br>  <!--Enter the price-->
+
+        <button type="submit" 
+                style="background-color: #A42153; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Add Item</button>  <!--Button styled to match palette, bold, rounded, and interactive.-->
+    </form>
+
+    <h2 style="margin-top: 40px; color: #A42153;">Update Menu Item</h2>
+    <form action="{{ url_for('admin_update_item') }}" method="post" style="background-color: #E6A6C6; padding: 20px; border-radius: 10px;">
+        <input type="password" name="admin_password" placeholder="Enter Admin Password" required 
+               style="padding: 10px; margin: 5px 0; width: 100%; border: 1px solid #C5558E; border-radius: 5px;"><br>
+
+        <input type="text" name="item" placeholder="Item Name" required 
+               style="padding: 10px; margin: 5px 0; width: 100%; border: 1px solid #C5558E; border-radius: 5px;"><br>
+
+        <input type="number" name="₹new_price" placeholder="New Price" required 
+               style="padding: 10px; margin: 5px 0; width: 100%; border: 1px solid #C5558E; border-radius: 5px;"><br>
+
+        <button type="submit" 
+                style="background-color: #A42153; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Update Item</button>
+    </form>
+
+    <h2 style="margin-top: 40px; color: #A42153;">Delete Menu Item</h2>
+    <form action="{{ url_for('admin_delete_item') }}" method="post" style="background-color: #E6A6C6; padding: 20px; border-radius: 10px;">
+        <input type="password" name="admin_password" placeholder="Enter Admin Password" required 
+               style="padding: 10px; margin: 5px 0; width: 100%; border: 1px solid #C5558E; border-radius: 5px;"><br>
+
+        <input type="text" name="item" placeholder="Item Name" required 
+               style="padding: 10px; margin: 5px 0; width: 100%; border: 1px solid #C5558E; border-radius: 5px;"><br>
+
+        <button type="submit" 
+                style="background-color: #A42153; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Delete Item</button>
+    </form>
+
+</body> <!--Closes the body of the HTML document-->
+</html> <!--Closes the HTML document-->
+
+<!--FEW QUESTIONS/IMPORTANT CONCEPTS-->
+<!--What is padding?-->
+<!--This means: 20 pixels of space is added inside the <body> element, between the edge of the page and the content inside it.-->
+
+<!--What is the url used form and what does it mean by form?-->
+<!--dynamically generates the correct URL for a function (route) defined in your server-side code.-->
+<!--A <form> is a section in HTML that: Collects user input-->
+<!--When the user fills this form and clicks Add Item-->
+<!--The browser sends a POST request to the admin_add_item route on your server-->
+<!-- Flask server can then process the data -->
+
+<!--How is the styling done on webpage?-->
+<!--padding: 10px; – adds inner spacing in the input box-->
+<!--margin: 5px 0; – adds space between rows-->
+<!--width: 100%; – makes each box stretch across the whole container-->
+<!--border, border-radius – makes it look clean and rounded-->
