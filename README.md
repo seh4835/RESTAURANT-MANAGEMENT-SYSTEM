@@ -1,6 +1,6 @@
 # 🍽️ Amour Bistro – Restaurant Management System
 
-# 📅 Project Duration
+📅 Project Duration
 January 2025 – April 2025
 Institution: Atlas SkillTech University
 Team Size: 4 Members
