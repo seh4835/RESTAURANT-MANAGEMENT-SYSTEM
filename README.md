@@ -2,9 +2,13 @@
 
 📅 Project Duration
 January 2025 – April 2025
+
 Institution: Atlas SkillTech University
+
 Team Size: 4 Members
+
 Project Type: Full-Stack Web Application
+
 Technologies: Flask · Python · MySQL · HTML · CSS · Regex
 
 # 📌 Project Overview
