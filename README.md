@@ -67,31 +67,55 @@ My personal contributions included:
 
 🧪 Writing exception handling logic and input sanitization
 
-🚀 How to Run Locally
+# 🚀 How to Run Locally
 Clone the repo
+
 bash
+
 Copy
+
 Edit
+
 git clone https://github.com/yourusername/amour-bistro.git
+
 cd amour-bistro
+
 Set up a virtual environment & install dependencies
+
 bash
+
 Copy
+
 Edit
+
 python -m venv venv  
-source venv/bin/activate  # or venv\Scripts\activate on Windows  
+
+source venv/bin/activate  # or venv\Scripts\activate on Windows 
+
 pip install -r requirements.txt  
+
 Start your MySQL server and import the schema
+
 sql
+
 Copy
+
 Edit
-CREATE DATABASE amour_bistro;  
-USE amour_bistro;  
+
+CREATE DATABASE amour_bistro; 
+
+USE amour_bistro;
+
 -- Import schema.sql file
+
 Run the app
+
 bash
+
 Copy
+
 Edit
+
 python app.py
 
 # 📢 Future Enhancements
